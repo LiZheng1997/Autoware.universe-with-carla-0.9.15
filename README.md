@@ -133,8 +133,7 @@ TODO List
 
 ## Reference
 
-\```
-
+```
 @inproceedings{carla_aw_bridge24,
 
   title = {CARLA-Autoware-Bridge: Facilitating Autonomous Driving Research
@@ -146,8 +145,7 @@ with a Unified Framework for Simulation and Module Development,
   year = {2024}
 
 }
-
-\```
+```
 
 
 
