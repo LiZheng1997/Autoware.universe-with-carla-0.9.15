@@ -1,4 +1,4 @@
-# 3 Steps to Deploy Carla_0.9.15 with Autoware.universe on Jetson Orin
+# 3 Steps to Deploy Autoware.universe with Using Carla_0.9.15 on Jetson Orin
 
 This repository is based on the github repository from TUM. [**LINK**](https://github.com/TUMFTM/Carla-Autoware-Bridge.git) 
 
