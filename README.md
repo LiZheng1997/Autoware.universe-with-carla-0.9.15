@@ -4,6 +4,8 @@ This repository is based on the github repository from TUM. [**LINK**](https://g
 
 Thanks a lot for their brilliant work, if you are interested in their paper, you can refer to this link [[PDF](https://arxiv.org/abs/2402.11239)]
 
+Autoware.universe source codes can be find from their github repository. [**LINK**](https://github.com/autowarefoundation/autoware/tree/v1.0)
+
 In this repository, we did some revisions to use **REV-shuttle-bus** in the **Carla simulator**, which has different sensors, also the **autoware.universe** version we used will be changed to our version later.
 
 ## **Requirements**
@@ -129,9 +131,23 @@ TODO List
 
 
 
+## Reference
 
+\```
 
+@inproceedings{carla_aw_bridge24,
 
+  title = {CARLA-Autoware-Bridge: Facilitating Autonomous Driving Research
+
+with a Unified Framework for Simulation and Module Development,
+
+  author = {Kaljavesi, Gemb and Kerbl, Tobias and Betz, Tobias and Mitkovskii, Kirill and Diermeyer, Frank},
+
+  year = {2024}
+
+}
+
+\```
 
 
 
