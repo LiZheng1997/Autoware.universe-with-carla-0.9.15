@@ -1,0 +1,73 @@
+- name: Get CUDA architecture name
+  ansible.builtin.shell: |
+    if [ "$(uname -m)" = "x86_64" ]; then
+      echo "x86_64"
+    else
+      echo "sbsa"
+    fi
+  register: cuda_architecture
+  changed_when: false
+
+- name: Remove old /etc/apt/sources.list.d/cuda.list
+  become: true
+  ansible.builtin.file:
+    path: /etc/apt/sources.list.d/cuda.list
+    state: absent
+
+- name: Install CUDA keyring
+  become: true
+  ansible.builtin.apt:
+    deb: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/{{ cuda_architecture.stdout }}/cuda-keyring_1.1-1_all.deb
+    update_cache: true
+
+- name: Get dash-case name of cuda_version
+  ansible.builtin.shell: bash -c 'sed -e "s/\./-/g" <<< $(echo {{ cuda_version }})'
+  register: cuda__dash_case_cuda_version
+  changed_when: false
+
+- name: Install CUDA libraries except for cuda-drivers
+  become: true
+  ansible.builtin.apt:
+    name:
+      - cuda-cudart-dev-{{ cuda__dash_case_cuda_version.stdout }}
+      - cuda-command-line-tools-{{ cuda__dash_case_cuda_version.stdout }}
+      - cuda-minimal-build-{{ cuda__dash_case_cuda_version.stdout }}
+      - cuda-libraries-dev-{{ cuda__dash_case_cuda_version.stdout }}
+      - cuda-nvml-dev-{{ cuda__dash_case_cuda_version.stdout }}
+      - libnpp-dev-{{ cuda__dash_case_cuda_version.stdout }}
+      - libcusparse-dev-{{ cuda__dash_case_cuda_version.stdout }}
+      - libcublas-dev-{{ cuda__dash_case_cuda_version.stdout }}
+      - libnccl-dev
+    update_cache: true
+
+- name: Install extra CUDA libraries for x86_64
+  become: true
+  ansible.builtin.apt:
+    name:
+      - cuda-nvprof-{{ cuda__dash_case_cuda_version.stdout }}
+    update_cache: true
+  when: cuda_architecture.stdout == "x86_64"
+
+- name: Install cuda-drivers
+  become: true
+  ansible.builtin.apt:
+    name:
+      - cuda-drivers
+    update_cache: true
+  when: cuda_install_drivers | bool
+
+- name: Add PATH to .bashrc
+  ansible.builtin.lineinfile:
+    dest: ~/.bashrc
+    line: export PATH="/usr/local/cuda/bin:$PATH"
+    state: present
+    create: true
+    mode: 0644
+
+- name: Add LD_LIBRARY_PATH to bashrc
+  ansible.builtin.lineinfile:
+    dest: ~/.bashrc
+    line: export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+    state: present
+    create: true
+    mode: 0644
