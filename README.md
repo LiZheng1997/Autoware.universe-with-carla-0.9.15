@@ -146,7 +146,7 @@ with a Unified Framework for Simulation and Module Development,
 
 }
 ```
-
+Blog link: https://www.bluenote.top/2024/03/12/008-AutonomousDriving/02-Autoware.universe/%E5%A6%82%E4%BD%953%E6%AD%A5%E5%AE%9E%E7%8E%B0%E5%9C%A8Jetson-Orin%E4%B8%8A%E8%81%94%E8%B0%83Autoware-Universe%E5%92%8CCarla-0-9-15%EF%BC%9F/index.html
 
 
 
