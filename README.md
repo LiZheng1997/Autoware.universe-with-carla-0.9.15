@@ -43,13 +43,13 @@ All devices are required to connect with each other in a local network. All 1 Gi
 
 
 
-## Steps to deploy
+## 3 Steps to deploy
 
 ### STEP-1: Deploy the carla-0.9.15 simulator
 
 This step is based on the carla official docker image, you have to pull the image and then run it on your Host machine.
 
-You have to check the rpc-port is not be used on your Host machine.
+You have to check the rpc-port is not used on your Host machine.
 
 ```bash
 $ docker pull carlasim/carla:0.9.15
