@@ -17,6 +17,7 @@ In this repository, we did some revisions to use **REV-shuttle-bus** in the **Ca
 3. Autoware-Carla-Bridge (Main Branch)
 4. ROS2 (Humble version)
 5. Ubuntu 22.04 (LTS Released version)
+6. Docker
 
 ### Hardware
 
@@ -82,9 +83,9 @@ $ rocker --user --nvidia --privileged --network host --x11 --volume $HOME/Docume
 $ ros2 launch autoware_launch e2e_simulator.launch.xml vehicle_model:=carla_t2_vehicle sensor_model:=carla_t2_sensor_kit map_path:=/autoware1.0_ws/Town10/
 ```
 
-***Note:*** When you run the rocker commands, and it may shows the error like the following messages:
-
-. You merely need to change the "--gpus all" to "--runtime=nvidia". like the example commands below: "Your commands will be different with mine, you should copy the commands, after you run the ***rocker --user --nvidia xxxx** command*"
+> ***Note:*** When you run the rocker commands, and it may shows the error like the following messages: ***invoking the NVIDIA Container Runtime Hook directly (e.g. specifying the docker --gpus flag) is not supported***.
+>
+> You merely need to change the "--gpus all" to "--runtime=nvidia". like the example commands below: "Your commands will be different with mine, you should copy the commands, after you run the ***rocker --user --nvidia xxxx** command*"
 
 ```bash
 $ docker run  --rm -it --network host   --runtime=nvidia --privileged  -e DISPLAY -e TERM   -e QT_X11_NO_MITSHM=1   -e XAUTHORITY=/tmp/.dockerafc7hfmf.xauth -v /tmp/.dockerafc7hfmf.xauth:/tmp/.dockerafc7hfmf.xauth   -v /tmp/.X11-unix:/tmp/.X11-unix   -v /etc/localtime:/etc/localtime:ro  8ea8cd5cadfe
@@ -129,6 +130,21 @@ TODO List
 - [ ] Add another shuttle-bus model in carla simulator to use
 - [ ] Simplified a Dockerfile for users to build the Autoware.universe docker image locally.
 - [ ] Uploads the revised autoware.universe codes for solving the problems of starting the perception module in the autoware.universe stack
+
+
+
+## Bugs Shooting
+
+docker run error, the error info is like the followings:
+
+```bash
+docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error running hook #0: error running hook: exit status 1, stdout: , stderr: Auto-detected mode as 'csv'
+invoking the NVIDIA Container Runtime Hook directly (e.g. specifying the docker --gpus flag) is not supported.Please use the NVIDIA Container Runtime (e.g. specify the --runtime=nvidia flag) instead.: unknown.
+```
+
+You have to use the "--runtime=nvidia " flag to run using docker run commands.
+
+
 
 
 
