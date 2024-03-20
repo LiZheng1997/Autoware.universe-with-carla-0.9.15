@@ -113,7 +113,14 @@ $ colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 
 If you want to compile the source codes on the Host Machine with a GPU card, you may need to solve some dependencies problems.
 
+Or you can use my customized docker image for x86 system on dockerhub
 
+```bash
+$ docker pull 1429053840/autoware.universe-carla-0.9.15:humble-20240215-cuda-amd64-v0.1
+$  rocker  --user --nvidia --privileged --network host --x11 --volume $HOME/CARLA --volume $HOME/Documents --  1429053840/autoware.universe-carla-0.9.15:humble-20240215-cuda-amd64-v0.1
+$ ros2 launch autoware_launch e2e_simulator.launch.xml vehicle_model:=carla_t2_vehicle sensor_model:=carla_t2_sensor_kit map_path:=/autoware1.0_ws/Town10/
+
+```
 
 
 
@@ -152,7 +159,9 @@ You have to use the "--runtime=nvidia " flag to run using docker run commands.
 
 [1] Kaljavesi, Gemb, et al. "CARLA-Autoware-Bridge: Facilitating Autonomous Driving Research with a Unified Framework for Simulation and Module Development." *arXiv preprint arXiv:2402.11239* (2024).
 
-Blog link: https://www.bluenote.top/2024/03/12/008-AutonomousDriving/02-Autoware.universe/%E5%A6%82%E4%BD%953%E6%AD%A5%E5%AE%9E%E7%8E%B0%E5%9C%A8Jetson-Orin%E4%B8%8A%E8%81%94%E8%B0%83Autoware-Universe%E5%92%8CCarla-0-9-15%EF%BC%9F/index.html
+Blog link: https://www.bluenote.top/2024/03/12/008-AutonomousDriving/02-Autoware.universe/%E5%A6%82%E4%BD%953%E6%AD%A5%E5%AE%9E%E7%8E%B0%E5%9C%A8Jetson-Orin%E4%B8%8A%E8%81%94%E8%B0%83Autoware-Universe%E5%92%8CCarla-0-9-15%EF%BC%9F/index.html English-version
+
+https://www.bluenote.top/2024/03/12/008-AutonomousDriving/02-Autoware.universe/How%20to%20Joint%20testing%20between%20Autoware-Universe%20and%20Carla-0-9-15%20on%20Jetson%20Orin?/  Chinese-version
 
 Github repo: https://github.com/TUMFTM/Carla-Autoware-Bridge.git
 
